@@ -19,6 +19,8 @@ public class YamlDocFacade {
 	private static final Logger logger = LoggerFactory.getLogger( YamlDocFacade.class );
 	
 	private static final String BUNDLE_LABEL_PATH = "lang.label";
+
+	public static final String CHAIN_ID_YAML_DOC_TEMPLATE = "yaml-doc-template";
 	
 	@SuppressWarnings("unchecked")
 	public int handle( Reader inputYaml, OutputStream outputData, YamlDocConfig config ) throws Exception  {
@@ -41,7 +43,7 @@ public class YamlDocFacade {
 		ProcessDocFacade docFacade = FjDocFacade.getInstance();
 		logger.info( "docFacade -> {}", docFacade );
 		DocProcessContext context = DocProcessContext.newContext( YamlModel.ATT_NAME, yamlModel );
-		docFacade.process( ProcessDocFacade.CHAIN_ID_YAML_DOC_TEMPLATE, config.getOutputFormat(), context, outputData ); 
+		docFacade.process( CHAIN_ID_YAML_DOC_TEMPLATE, config.getOutputFormat(), context, outputData ); 
 		return result;
 	}
 	
