@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.Reader;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
@@ -20,6 +21,8 @@ public class YamlDocMain {
 	
 	public static final String ARG_OUTPUT_FILE = "output-file";
 	
+	public static final String ARG_LANGUAGE = "language";
+	
 	public static void main( String[] args ) {
 		try {
 			Properties props = ArgUtils.getArgs( args );
@@ -28,6 +31,7 @@ public class YamlDocMain {
 			if ( StringUtils.isEmpty( inputYaml ) || StringUtils.isEmpty( outputPath ) ) {
 				throw new ConfigException( "Required params : "+ARG_INPUT_YAML+", "+ARG_OUTPUT_FILE );
 			} else {
+				String language = props.getProperty( ARG_LANGUAGE );
 				File inputFile = new File( inputYaml );
 				File outputFile = new File( outputPath );
 				String fileName = outputFile.getName();
@@ -35,6 +39,9 @@ public class YamlDocMain {
 				try ( Reader reader = new FileReader( inputFile );
 						FileOutputStream fos = new FileOutputStream( outputFile ) ) {
 					YamlDocConfig config = new YamlDocConfig( outputFormat );
+					if ( StringUtils.isNotEmpty( language ) ) {
+						config.setLocale( Locale.forLanguageTag( language ) );
+					}
 					YamlDocFacade facade = new YamlDocFacade();
 					facade.handle(reader, fos, config);
 				}

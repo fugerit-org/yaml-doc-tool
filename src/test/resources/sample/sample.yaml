@@ -124,7 +124,8 @@ components:
           example: ''
         nome: 
           type: string
-          example: ''
+          example: 'MARIO'
+          description: 'Nome del soggetto'
         senzaNome: 
           type: string
           example: ''

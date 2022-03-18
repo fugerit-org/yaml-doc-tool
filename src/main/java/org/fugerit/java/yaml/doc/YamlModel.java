@@ -1,10 +1,21 @@
 package org.fugerit.java.yaml.doc;
 
 import java.util.Map;
+import java.util.Properties;
 
 public class YamlModel {
 	
 	public static final String ATT_NAME = "yamlModel";
+
+	private Properties labels;
+	
+	public Properties getLabels() {
+		return labels;
+	}
+
+	public void setLabels(Properties labels) {
+		this.labels = labels;
+	}
 
 	private Map<String, Object> schemas;
 

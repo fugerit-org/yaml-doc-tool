@@ -10,6 +10,8 @@
   			(In case check FreeMarker documentation https://freemarker.apache.org/docs/index.html)
    -->
 
+  <#assign labels=yamlModel.labels>
+
   <meta>
   
   	<!-- specific properties for PDF -->
@@ -35,20 +37,18 @@
     </bookmark-tree>
   	
   </meta>
- 
+	
   <body>
-  
-  		<h head-level="1" style="bold" size="16">Openapi Schema List</h>
-  
+  		<h head-level="1" style="bold" size="16">${messageFormat(labels['title.schema.list'])}</h>
 		<#list yamlModel.schemas?keys as currentSchemaKey>
-			<h id="${currentSchemaKey}" head-level="2" style="bold" size="14" space-before="20">Schema : ${currentSchemaKey}</h>
+			<h id="${currentSchemaKey}" head-level="2" style="bold" size="14" space-before="20">${messageFormat(labels['title.schema.current'])} : ${currentSchemaKey}</h>
 			<#assign currentSchemaValue=yamlModel.schemas[currentSchemaKey]>
 			<table id="table_${currentSchemaKey}" columns="4" colwidths="30;30;20;20"  width="100" padding="2">
 	    		<row>
-	    			<cell header="true"><para style="bold">Field</para></cell>
-	    			<cell header="true"><para style="bold">Type</para></cell>
-	    			<cell header="true"><para style="bold">Example</para></cell>
-	    			<cell header="true"><para style="bold">Description</para></cell>
+	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.name'])}</para></cell>
+	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.type'])}</para></cell>
+	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.example'])}</para></cell>
+	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.description'])}</para></cell>
 	    		</row>
 	    		<#list currentSchemaValue['properties']?keys as currentFieldKey>
 	    			<#assign currentFieldValue=currentSchemaValue['properties'][currentFieldKey]>
@@ -74,7 +74,6 @@
 	    		</#list>  
 	    	</table>
 		</#list>  
-
   </body>
   
 </doc>

@@ -19,6 +19,13 @@
 				log-exception="false"
 				wrap-unchecked-exceptions="true"
 				fallback-on-null-loop-variable="false" />
+		</step>	
+		<step id="step-02" defaultBehaviour="CONTINUE"
+			description="Add custom functions" 
+			type="org.fugerit.java.doc.freemarker.config.FreeMarkerFunctionStep">
+			<properties 
+				messageFormat="org.fugerit.java.doc.freemarker.fun.SimpleMessageFun"
+				sumLong="org.fugerit.java.doc.freemarker.fun.SimpleSumLongFun"  />
 		</step>		
 	</chain>
 

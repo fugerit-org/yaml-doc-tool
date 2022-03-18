@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.util.Locale;
 
 import org.fugerit.java.doc.base.config.DocConfig;
 import org.fugerit.java.yaml.doc.YamlDocConfig;
@@ -17,12 +18,16 @@ import org.slf4j.LoggerFactory;
 
 public class TestYamlDocFacade {
 
-	protected final static Logger logger = LoggerFactory.getLogger( TestYamlDocFacade.class );
+	private final static Logger logger = LoggerFactory.getLogger( TestYamlDocFacade.class );
+	
+	//private static final Locale LOCALE = Locale.ENGLISH;
+	private static final Locale LOCALE = Locale.ITALIAN;
 	
 	public void testWorkerSample( String outputFormat ) {	
 		try ( Reader reader = new FileReader( "src/test/resources/sample/sample.yaml" );
 				OutputStream os = new FileOutputStream( new File( "target/sample."+outputFormat ) )) {
 			YamlDocConfig config = new YamlDocConfig( outputFormat );
+			config.setLocale( LOCALE );
 			YamlDocFacade facade = new YamlDocFacade();
 			int result = facade.handle(reader, os, config);
 			logger.info( "result -> {}", result );
