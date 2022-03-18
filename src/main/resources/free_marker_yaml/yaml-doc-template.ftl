@@ -11,9 +11,29 @@
    -->
 
   <meta>
+  
+  	<!-- specific properties for PDF -->
   	<info name="margins">10;10;10;10</info>
   	<info name="page-width">29.7cm</info>
   	<info name="page-height">21cm</info>
+  	
+  	<!-- specific properties for XLSX -->
+  	<#assign excelTableId=''>
+  	<#list yamlModel.schemas?keys as currentSchemaKey>
+  		<#if currentSchemaKey?index != 0>
+  			<#assign excelTableId>${excelTableId};</#assign>
+  		</#if>
+  		<#assign excelTableId>${excelTableId}table_${currentSchemaKey}=${currentSchemaKey}</#assign>
+ 	</#list>
+   	<info name="excel-table-id">${excelTableId}</info>
+	<info name="excel-width-multiplier">900</info> 
+  	
+ 	<bookmark-tree>
+ 		<#list yamlModel.schemas?keys as currentSchemaKey>
+ 			 <bookmark ref="${currentSchemaKey}">${currentSchemaKey}</bookmark>
+ 		</#list>
+    </bookmark-tree>
+  	
   </meta>
  
   <body>
@@ -21,9 +41,9 @@
   		<h head-level="1" style="bold" size="16">Openapi Schema List</h>
   
 		<#list yamlModel.schemas?keys as currentSchemaKey>
-			<h head-level="2" style="bold" size="14" space-before="20">Schema : ${currentSchemaKey}</h>
+			<h id="${currentSchemaKey}" head-level="2" style="bold" size="14" space-before="20">Schema : ${currentSchemaKey}</h>
 			<#assign currentSchemaValue=yamlModel.schemas[currentSchemaKey]>
-			<table columns="4" colwidths="30;30;20;20"  width="100" id="excel-table" padding="2">
+			<table id="table_${currentSchemaKey}" columns="4" colwidths="30;30;20;20"  width="100" padding="2">
 	    		<row>
 	    			<cell header="true"><para style="bold">Field</para></cell>
 	    			<cell header="true"><para style="bold">Type</para></cell>

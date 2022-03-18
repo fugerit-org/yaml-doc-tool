@@ -19,9 +19,7 @@ public class TestYamlDocFacade {
 
 	protected final static Logger logger = LoggerFactory.getLogger( TestYamlDocFacade.class );
 	
-	@Test
-	public void testSample() {
-		String outputFormat = DocConfig.TYPE_PDF;		
+	public void testWorkerSample( String outputFormat ) {	
 		try ( Reader reader = new FileReader( "src/test/resources/sample/sample.yaml" );
 				OutputStream os = new FileOutputStream( new File( "target/sample."+outputFormat ) )) {
 			YamlDocConfig config = new YamlDocConfig( outputFormat );
@@ -34,4 +32,13 @@ public class TestYamlDocFacade {
 			fail( message );
 		}
 	}
+	
+	@Test
+	public void testSample() {
+		this.testWorkerSample( DocConfig.TYPE_XML );
+		this.testWorkerSample( DocConfig.TYPE_FO );
+		this.testWorkerSample( DocConfig.TYPE_PDF );
+		this.testWorkerSample( DocConfig.TYPE_XLSX );
+	}
+	
 }

@@ -117,7 +117,8 @@ components:
           $ref: '#/components/schemas/TipoCodiceFiscale'
         cognome: 
           type: string
-          example: ''
+          example: 'ROSSI'
+          description: 'Il cognome del soggetto'
         senzaCognome: 
           type: string
           example: ''

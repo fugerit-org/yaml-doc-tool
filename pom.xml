@@ -24,7 +24,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<!-- libraries versions -->
 		<fj-version>0.7.6.7</fj-version>
-		<fj-doc-version>0.3.9.1</fj-doc-version>
+		<fj-doc-version>0.3.9.2</fj-doc-version>
 		<snake-yaml-version>1.30</snake-yaml-version>
 	</properties>
 
@@ -89,21 +89,24 @@
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-base</artifactId>
 			<version>${fj-doc-version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-freemarker</artifactId>
 			<version>${fj-doc-version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-mod-fop</artifactId>
 			<version>${fj-doc-version}</version>
-			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.fugerit.java</groupId>
+			<artifactId>fj-doc-mod-poi</artifactId>
+			<version>${fj-doc-version}</version>
 		</dependency>
 
 		<!-- logging -->
