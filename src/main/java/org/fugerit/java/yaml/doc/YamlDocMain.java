@@ -10,6 +10,7 @@ import java.util.Properties;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cli.ArgUtils;
 import org.fugerit.java.core.lang.helpers.StringUtils;
+import org.fugerit.java.core.util.PropsIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,8 @@ public class YamlDocMain {
 	
 	public static final String ARG_LANGUAGE = "language";
 	
+	public static final String ARG_LABEL_OVVERRIDE = "labels-override";
+	
 	public static void main( String[] args ) {
 		try {
 			Properties props = ArgUtils.getArgs( args );
@@ -32,6 +35,7 @@ public class YamlDocMain {
 				throw new ConfigException( "Required params : "+ARG_INPUT_YAML+", "+ARG_OUTPUT_FILE );
 			} else {
 				String language = props.getProperty( ARG_LANGUAGE );
+				String labelOverride = props.getProperty( ARG_LABEL_OVVERRIDE );
 				File inputFile = new File( inputYaml );
 				File outputFile = new File( outputPath );
 				String fileName = outputFile.getName();
@@ -41,6 +45,10 @@ public class YamlDocMain {
 					YamlDocConfig config = new YamlDocConfig( outputFormat );
 					if ( StringUtils.isNotEmpty( language ) ) {
 						config.setLocale( Locale.forLanguageTag( language ) );
+					}
+					
+					if ( StringUtils.isNotEmpty( labelOverride ) ) {
+						config.setLabelsOverride( PropsIO.loadFromFile( labelOverride ) );
 					}
 					YamlDocFacade facade = new YamlDocFacade();
 					facade.handle(reader, fos, config);

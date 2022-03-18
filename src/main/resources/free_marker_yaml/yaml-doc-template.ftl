@@ -14,6 +14,13 @@
 
   <meta>
   
+	<info name="doc-version">${messageFormat(labels['doc.def.version'])}</info>
+	<info name="doc-title">${messageFormat(labels['doc.def.title'])}</info>
+	<info name="doc-author">${messageFormat(labels['doc.def.author'])}</info>
+	<info name="doc-subject">${messageFormat(labels['doc.def.subject'])}</info>
+	<info name="doc-creator">Fugerit - Yaml Doc Tool</info>
+	<info name="doc-language">${yamlModel.config.languageCode}</info>		  	
+  
   	<!-- specific properties for PDF -->
   	<info name="margins">10;10;10;10</info>
   	<info name="page-width">29.7cm</info>

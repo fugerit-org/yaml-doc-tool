@@ -7,6 +7,16 @@ public class YamlModel {
 	
 	public static final String ATT_NAME = "yamlModel";
 
+	private YamlDocConfig config;
+	
+	public YamlDocConfig getConfig() {
+		return config;
+	}
+
+	public void setConfig(YamlDocConfig config) {
+		this.config = config;
+	}
+
 	private Properties labels;
 	
 	public Properties getLabels() {

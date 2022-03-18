@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.util.Locale;
 
+import org.fugerit.java.core.util.PropsIO;
 import org.fugerit.java.doc.base.config.DocConfig;
 import org.fugerit.java.yaml.doc.YamlDocConfig;
 import org.fugerit.java.yaml.doc.YamlDocFacade;
@@ -28,6 +29,7 @@ public class TestYamlDocFacade {
 				OutputStream os = new FileOutputStream( new File( "target/sample."+outputFormat ) )) {
 			YamlDocConfig config = new YamlDocConfig( outputFormat );
 			config.setLocale( LOCALE );
+			config.setLabelsOverride( PropsIO.loadFromClassLoader( "sample/sample-label-override.properties" ) );
 			YamlDocFacade facade = new YamlDocFacade();
 			int result = facade.handle(reader, os, config);
 			logger.info( "result -> {}", result );
