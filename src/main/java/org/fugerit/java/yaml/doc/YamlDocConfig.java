@@ -7,6 +7,9 @@ public class YamlDocConfig {
 
 	public YamlDocConfig() {
 		this.locale = Locale.getDefault();
+		if ( this.locale == null ) {
+			this.locale = Locale.ENGLISH;
+		}
 		this.labelsOverride = new Properties();
 	}
 	
@@ -21,14 +24,14 @@ public class YamlDocConfig {
 	}
 
 	public YamlDocConfig(String outputFormat) {
-		super();
+		this();
 		this.outputFormat = outputFormat;
 	}
 	
 	private Locale locale;
 
 	public Locale getLocale() {
-		return locale;
+		return this.locale;
 	}
 
 	public void setLocale(Locale locale) {
