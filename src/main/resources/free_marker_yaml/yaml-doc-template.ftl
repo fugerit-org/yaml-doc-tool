@@ -46,9 +46,12 @@
   </meta>
 	
   <body>
-  		<h head-level="1" style="bold" size="16">${messageFormat(labels['title.schema.list'])}</h>
+  	
+  		<h head-level="1" style="bold" size="16" space-after="20">${messageFormat(labels['doc.def.title'])}</h>
+  
+  		<h head-level="2" style="bold" size="16">${messageFormat(labels['title.schema.list'])}</h>
 		<#list yamlModel.schemas?keys as currentSchemaKey>
-			<h id="${currentSchemaKey}" head-level="2" style="bold" size="14" space-before="20">${messageFormat(labels['title.schema.current'])} : ${currentSchemaKey}</h>
+			<h id="${currentSchemaKey}" head-level="3" style="bold" size="14" space-before="20">${messageFormat(labels['title.schema.current'])} : ${currentSchemaKey}</h>
 			<#assign currentSchemaValue=yamlModel.schemas[currentSchemaKey]>
 			<table id="table_${currentSchemaKey}" columns="4" colwidths="30;30;20;20"  width="100" padding="2">
 	    		<row>

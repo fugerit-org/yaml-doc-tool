@@ -26,34 +26,38 @@ public class YamlDocMain {
 	
 	public static final String ARG_LABEL_OVVERRIDE = "labels-override";
 	
+	public static void worker( Properties props ) throws Exception {
+		String inputYaml = props.getProperty( ARG_INPUT_YAML );
+		String outputPath = props.getProperty( ARG_OUTPUT_FILE );
+		if ( StringUtils.isEmpty( inputYaml ) || StringUtils.isEmpty( outputPath ) ) {
+			throw new ConfigException( "Required params : "+ARG_INPUT_YAML+", "+ARG_OUTPUT_FILE );
+		} else {
+			String language = props.getProperty( ARG_LANGUAGE );
+			String labelOverride = props.getProperty( ARG_LABEL_OVVERRIDE );
+			File inputFile = new File( inputYaml );
+			File outputFile = new File( outputPath );
+			String fileName = outputFile.getName();
+			String outputFormat = fileName.substring( fileName.lastIndexOf( '.' )+1 );
+			try ( Reader reader = new FileReader( inputFile );
+					FileOutputStream fos = new FileOutputStream( outputFile ) ) {
+				YamlDocConfig config = new YamlDocConfig( outputFormat );
+				if ( StringUtils.isNotEmpty( language ) ) {
+					config.setLocale( Locale.forLanguageTag( language ) );
+				}
+				
+				if ( StringUtils.isNotEmpty( labelOverride ) ) {
+					config.setLabelsOverride( PropsIO.loadFromFile( labelOverride ) );
+				}
+				YamlDocFacade facade = new YamlDocFacade();
+				facade.handle(reader, fos, config);
+			}
+		}
+	}
+	
 	public static void main( String[] args ) {
 		try {
 			Properties props = ArgUtils.getArgs( args );
-			String inputYaml = props.getProperty( ARG_INPUT_YAML );
-			String outputPath = props.getProperty( ARG_OUTPUT_FILE );
-			if ( StringUtils.isEmpty( inputYaml ) || StringUtils.isEmpty( outputPath ) ) {
-				throw new ConfigException( "Required params : "+ARG_INPUT_YAML+", "+ARG_OUTPUT_FILE );
-			} else {
-				String language = props.getProperty( ARG_LANGUAGE );
-				String labelOverride = props.getProperty( ARG_LABEL_OVVERRIDE );
-				File inputFile = new File( inputYaml );
-				File outputFile = new File( outputPath );
-				String fileName = outputFile.getName();
-				String outputFormat = fileName.substring( fileName.lastIndexOf( '.' )+1 );
-				try ( Reader reader = new FileReader( inputFile );
-						FileOutputStream fos = new FileOutputStream( outputFile ) ) {
-					YamlDocConfig config = new YamlDocConfig( outputFormat );
-					if ( StringUtils.isNotEmpty( language ) ) {
-						config.setLocale( Locale.forLanguageTag( language ) );
-					}
-					
-					if ( StringUtils.isNotEmpty( labelOverride ) ) {
-						config.setLabelsOverride( PropsIO.loadFromFile( labelOverride ) );
-					}
-					YamlDocFacade facade = new YamlDocFacade();
-					facade.handle(reader, fos, config);
-				}
-			}
+			worker(props);
 		} catch (Exception e) {
 			logger.error( "Error : "+e ,e );
 		}
