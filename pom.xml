@@ -2,26 +2,33 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.fugerit.java</groupId>
 	<artifactId>yaml-doc-tool</artifactId>
+
+	<parent>
+		<groupId>org.fugerit.java</groupId>
+		<artifactId>fj-bom</artifactId>
+		<version>0.1.1</version>
+		<relativePath></relativePath>
+	</parent>
 
 	<version>0.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>yaml-doc-tool</name>
-	<description>Tool export query in CSV (and in the furutre other) formats</description>
+	<description>Tool for auto documentation of yaml / openapi</description>
 	<url>http://www.fugerit.org/java/</url>
 
 	<scm>
-		<connection>scm:git:git://github.com/fugerit-org/query-export-tool.git</connection>
-		<developerConnection>scm:git:ssh://github.com/fugerit-org/query-export-tool.git</developerConnection>
-		<url>http://github.com/fugerit-org/query-export-tool/tree/master</url>
+		<connection>scm:git:git://github.com/fugerit-org/yaml-doc-tool.git</connection>
+		<developerConnection>scm:git:ssh://github.com/fugerit-org/yaml-doc-tool.git</developerConnection>
+		<url>http://github.com/fugerit-org/yaml-doc-tool/tree/main</url>
 	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
+		<java-version-compliance>1.8</java-version-compliance>
+	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
+	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>
 		<!-- libraries versions -->
 		<fj-version>0.7.6.8</fj-version>
 		<fj-doc-version>0.3.9.2</fj-doc-version>
@@ -72,13 +79,6 @@
 			<version>${fj-version}</version>
 		</dependency>
 	
-		<!-- java core dependancies -->
-		<dependency>
-			<groupId>maven</groupId>
-			<artifactId>maven-java-plugin</artifactId>
-			<version>1.6</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-base</artifactId>
@@ -112,26 +112,22 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.4</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-slf4j-impl</artifactId>
-		    <version>2.13.1</version>
 		</dependency>
 
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>2.3.4</version>
             <scope>test</scope>
         </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -144,7 +140,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -157,10 +152,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
-				<configuration>
-					<stylesheetfile>src/main/javadoc/stylesheet.css</stylesheetfile>
-				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
