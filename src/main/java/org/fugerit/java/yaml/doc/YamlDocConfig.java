@@ -52,4 +52,14 @@ public class YamlDocConfig {
 		this.labelsOverride = labelsOverride;
 	}
 	
+	private boolean excelTryAutoresize;
+
+	public boolean getExcelTryAutoresize() {
+		return excelTryAutoresize;
+	}
+
+	public void setExcelTryAutoresize(boolean excelTryAutoresize) {
+		this.excelTryAutoresize = excelTryAutoresize;
+	}
+	
 }

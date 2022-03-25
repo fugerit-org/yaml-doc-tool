@@ -30,6 +30,7 @@ public class TestYamlDocFacade {
 			YamlDocConfig config = new YamlDocConfig( outputFormat );
 			config.setLocale( LOCALE );
 			config.setLabelsOverride( PropsIO.loadFromClassLoader( "sample/sample-label-override.properties" ) );
+			config.setExcelTryAutoresize( true );
 			YamlDocFacade facade = new YamlDocFacade();
 			int result = facade.handle(reader, os, config);
 			logger.info( "result -> {}", result );

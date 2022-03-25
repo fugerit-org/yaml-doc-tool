@@ -25,7 +25,6 @@
   	<info name="margins">10;10;10;10</info>
   	<info name="page-width">29.7cm</info>
   	<info name="page-height">21cm</info>
-  	<info name="excel-try-autoresize">${yamlModel.config.excelTryAutoresize?c}</info>
   	
   	<!-- specific properties for XLSX -->
   	<#assign excelTableId=''>

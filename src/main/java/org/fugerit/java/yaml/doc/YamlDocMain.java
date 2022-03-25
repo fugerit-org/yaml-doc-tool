@@ -9,8 +9,10 @@ import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cli.ArgUtils;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.core.util.PropsIO;
+import org.fugerit.java.doc.base.typehelper.excel.ExcelHelperConsts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +27,8 @@ public class YamlDocMain {
 	public static final String ARG_LANGUAGE = "language";
 	
 	public static final String ARG_LABEL_OVVERRIDE = "labels-override";
+	
+	public static final String ARG_EXCEL_TRY_AUTORESIZE = ExcelHelperConsts.PROP_XLS_TRY_AUTORESIZE;
 	
 	public static void worker( Properties props ) throws Exception {
 		String inputYaml = props.getProperty( ARG_INPUT_YAML );
@@ -44,10 +48,10 @@ public class YamlDocMain {
 				if ( StringUtils.isNotEmpty( language ) ) {
 					config.setLocale( Locale.forLanguageTag( language ) );
 				}
-				
 				if ( StringUtils.isNotEmpty( labelOverride ) ) {
 					config.setLabelsOverride( PropsIO.loadFromFile( labelOverride ) );
 				}
+				config.setExcelTryAutoresize( BooleanUtils.isTrue( props.getProperty( ARG_EXCEL_TRY_AUTORESIZE, ExcelHelperConsts.PROP_XLS_TRY_AUTORESIZE_DEFAULT ) ) );
 				YamlDocFacade facade = new YamlDocFacade();
 				facade.handle(reader, fos, config);
 			}
