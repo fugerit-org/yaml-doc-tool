@@ -28,6 +28,7 @@ public class YamlDocFacade {
 		// yaml parsing
 		Yaml yaml = new Yaml();
 		Map<String, Object> fullYaml = yaml.load( inputYaml );
+		Map<String, Object> paths = (Map<String, Object>)fullYaml.get( "paths" );
 		Map<String, Object> components = (Map<String, Object>)fullYaml.get( "components" );
 		Map<String, Object> schemas = (Map<String, Object>)components.get( "schemas" );
 		// bundle labels
@@ -36,6 +37,7 @@ public class YamlDocFacade {
 		labels.putAll( config.getLabelsOverride() );
 		// build model
 		YamlModel yamlModel = new YamlModel();
+		yamlModel.setPaths( paths );
 		yamlModel.setSchemas( schemas );
 		yamlModel.setLabels( labels );
 		yamlModel.setConfig( config );

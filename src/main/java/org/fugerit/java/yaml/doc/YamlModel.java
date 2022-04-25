@@ -27,6 +27,16 @@ public class YamlModel {
 		this.labels = labels;
 	}
 
+	private Map<String, Object> paths;
+	
+	public Map<String, Object> getPaths() {
+		return paths;
+	}
+
+	public void setPaths(Map<String, Object> paths) {
+		this.paths = paths;
+	}
+
 	private Map<String, Object> schemas;
 
 	public Map<String, Object> getSchemas() {

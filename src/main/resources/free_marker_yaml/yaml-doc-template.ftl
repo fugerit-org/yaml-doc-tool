@@ -1,3 +1,4 @@
+<#import "yaml-doc-macro.ftl" as docMacro>
 <?xml version="1.0" encoding="utf-8"?>
 <doc
 	xmlns="http://javacoredoc.fugerit.org"
@@ -50,39 +51,48 @@
   	
   		<h head-level="1" style="bold" size="16" space-after="20">${messageFormat(labels['doc.def.title'])}</h>
   
-  		<h head-level="2" style="bold" size="16">${messageFormat(labels['title.schema.list'])}</h>
+  		<#if (yamlModel.paths)?? >
+  			<h space-after="20" head-level="2" style="bold" size="16">${messageFormat(labels['title.path.list'])}</h>
+  			<list>
+  			<#list yamlModel.paths?keys as currentPathKey>
+  				<li><para>${currentPathKey}<#if (yamlModel.paths[currentPathKey]['description']??)> - ${yamlModel.paths[currentPathKey]['description']}</#if></para></li>
+  			</#list>
+  			</list>
+  		</#if>
+  	
+  		<h space-before="20" space-after="20" head-level="2" style="bold" size="16">${messageFormat(labels['title.schema.list'])}</h>
 		<#list yamlModel.schemas?keys as currentSchemaKey>
 			<h id="${currentSchemaKey}" head-level="3" style="bold" size="14" space-before="20">${messageFormat(labels['title.schema.current'])} : ${currentSchemaKey}</h>
 			<#assign currentSchemaValue=yamlModel.schemas[currentSchemaKey]>
 			<table id="table_${currentSchemaKey}" columns="4" colwidths="30;30;20;20"  width="100" padding="2">
-	    		<row>
-	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.name'])}</para></cell>
-	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.type'])}</para></cell>
-	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.example'])}</para></cell>
-	    			<cell header="true"><para style="bold">${messageFormat(labels['table.field.description'])}</para></cell>
-	    		</row>
-	    		<#list currentSchemaValue['properties']?keys as currentFieldKey>
-	    			<#assign currentFieldValue=currentSchemaValue['properties'][currentFieldKey]>
+				<#if (currentSchemaValue['description'])?? >
 					<row>
-						<cell><para>${currentFieldKey}</para></cell>
-	    			<#if currentFieldValue['$ref']?? >
-	    				<cell><para>${currentFieldValue['$ref']}</para></cell>
-		    		<#elseif currentFieldValue['type']??>
-		    			<#assign currentType=currentFieldValue['type']>
-		    			<#if currentType = 'array' >
-		    				<#if currentFieldValue['items']['$ref']?? >
-		    					<#assign arrayType=currentFieldValue['items']['$ref']/>
-		    				</#if>			
-		    				<#assign currentType>${currentType}[${arrayType!''}]</#assign>
-		    			</#if>
-	    				<cell><para>${currentType}</para></cell>
-		    		<#else>		
-		    			<cell><para></para></cell>
-					</#if>		 
-					<cell><para>${currentFieldValue['example']!''}</para></cell>
-					<cell><para>${currentFieldValue['description']!''}</para></cell>
-		    		</row>	    		
-	    		</#list>  
+						<cell><para style="bold">${messageFormat(labels['table.field.description'])}</para></cell>
+						<cell colspan="3"><para>${currentSchemaValue['description']}</para></cell>
+					</row>
+				</#if>
+				<#if (currentSchemaValue['allOf'])?? >
+					<#list currentSchemaValue['allOf'] as listAllOf>
+						<#if (listAllOf['$ref'])?? >
+							<row>
+								<cell><para style="bold">${messageFormat(labels['type.extends'])}</para></cell>
+								<cell colspan="3"><para>${listAllOf['$ref']}</para></cell>
+							</row>
+						<#elseif (listAllOf['type'])?? >
+							<row>
+								<cell><para style="bold">${messageFormat(labels['type.base'])}</para></cell>
+								<cell colspan="3"><para>${listAllOf['type']}</para></cell>
+							</row>
+							<#if (listAllOf['properties'])?? >
+								<@docMacro.printProperties propsMap=listAllOf['properties'] labelMap=labels/>
+							</#if>
+						</#if>
+					</#list>
+
+				</#if>
+				<#if (currentSchemaValue['properties'])?? >
+					<@docMacro.printProperties propsMap=currentSchemaValue['properties'] labelMap=labels/>
+				</#if>
 	    	</table>
 		</#list>  
   </body>
