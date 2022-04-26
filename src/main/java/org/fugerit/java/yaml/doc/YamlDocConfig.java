@@ -82,4 +82,14 @@ public class YamlDocConfig {
 		this.excludeSchemas = excludeSchemas;
 	}
 	
+	private boolean useOpenapiTitle;
+
+	public boolean isUseOpenapiTitle() {
+		return useOpenapiTitle;
+	}
+
+	public void setUseOpenapiTitle(boolean useOpenapiTitle) {
+		this.useOpenapiTitle = useOpenapiTitle;
+	}
+	
 }

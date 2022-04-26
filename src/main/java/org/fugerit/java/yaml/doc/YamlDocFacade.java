@@ -31,9 +31,13 @@ public class YamlDocFacade {
 		Map<String, Object> paths = (Map<String, Object>)fullYaml.get( "paths" );
 		Map<String, Object> components = (Map<String, Object>)fullYaml.get( "components" );
 		Map<String, Object> schemas = (Map<String, Object>)components.get( "schemas" );
+		Map<String, Object> info = (Map<String, Object>)fullYaml.get( "info" );
 		// bundle labels
 		ResourceBundle labelsBundle = ResourceBundle.getBundle( BUNDLE_LABEL_PATH, config.getLocale() );
 		Properties labels = PropsIO.loadFromBundle( labelsBundle );
+		if ( config.isUseOpenapiTitle() && info.containsKey( "title" ) ) {
+			labels.setProperty( "doc.def.title" , (String)info.get( "title" ) );
+		}
 		labels.putAll( config.getLabelsOverride() );
 		// build model
 		YamlModel yamlModel = new YamlModel();

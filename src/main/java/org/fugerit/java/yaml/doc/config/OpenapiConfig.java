@@ -22,6 +22,8 @@ public class OpenapiConfig extends BasicIdConfigType {
 	private String excludePaths;
 	
 	private String excludeSchemas;
+	
+	private String useOpenapiTitle;
 
 	public String getInputYaml() {
 		return inputYaml;
@@ -77,6 +79,14 @@ public class OpenapiConfig extends BasicIdConfigType {
 
 	public void setExcludeSchemas(String excludeSchemas) {
 		this.excludeSchemas = excludeSchemas;
+	}
+
+	public String getUseOpenapiTitle() {
+		return useOpenapiTitle;
+	}
+
+	public void setUseOpenapiTitle(String useOpenapiTitle) {
+		this.useOpenapiTitle = useOpenapiTitle;
 	}
 	
 }

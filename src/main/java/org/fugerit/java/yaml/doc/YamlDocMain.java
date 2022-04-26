@@ -47,6 +47,8 @@ public class YamlDocMain {
 	
 	public static final String ARG_ID_CATALOG = "id-catalog";
 	
+	public static final String ARG_USE_OPENAPI_TITLE = "use-openapi-title";
+	
     private static void addIfNotEmpty( Properties props, String key, String value ) {
     	if ( StringUtils.isNotEmpty( value ) ) {
     		props.setProperty( key , value );
@@ -65,6 +67,7 @@ public class YamlDocMain {
 				String labelOverride = props.getProperty( ARG_LABEL_OVVERRIDE );
 				String excludePaths = props.getProperty( ARG_EXCLUDE_PATHS );
 				String excludeSchemas = props.getProperty( ARG_EXCLUDE_SCHEMAS );
+				String useOpenapiTitle = props.getProperty( ARG_USE_OPENAPI_TITLE );
 				File inputFile = new File( inputYaml );
 				File outputFile = new File( outputPath );
 				String fileName = outputFile.getName();
@@ -83,6 +86,9 @@ public class YamlDocMain {
 					}
 					if ( StringUtils.isNotEmpty( excludeSchemas ) ) {
 						config.setExcludeSchemas( BooleanUtils.isTrue( excludeSchemas ) );
+					}
+					if ( StringUtils.isNotEmpty( useOpenapiTitle ) ) {
+						config.setUseOpenapiTitle( BooleanUtils.isTrue( useOpenapiTitle ) );
 					}
 					config.setExcelTryAutoresize( BooleanUtils.isTrue( props.getProperty( ARG_EXCEL_TRY_AUTORESIZE, ExcelHelperConsts.PROP_XLS_TRY_AUTORESIZE_DEFAULT ) ) );
 					YamlDocFacade facade = new YamlDocFacade();
@@ -109,6 +115,7 @@ public class YamlDocMain {
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCEL_TRY_AUTORESIZE, current.getExcelTryAutoresize() );
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_PATHS, current.getExcludePaths() );
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_SCHEMAS, current.getExcludeSchemas() );
+	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_USE_OPENAPI_TITLE, current.getUseOpenapiTitle() );
 	                	logger.info( "using parameters -> "+props );
 	                	YamlDocMain.worker( propsCurrent );
 	        		}
