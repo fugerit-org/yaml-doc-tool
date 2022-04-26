@@ -24,6 +24,10 @@ public class YamlDocMain {
 
 	private static final Logger logger = LoggerFactory.getLogger( YamlDocMain.class );
 	
+	public static final String ARG_EXCLUDE_PATHS = "exclude-paths";
+	
+	public static final String ARG_EXCLUDE_SCHEMAS = "exclude-schemas";
+	
 	public static final String ARG_INPUT_YAML = "input-yaml";
 	
 	public static final String ARG_OUTPUT_FILE = "output-file";
@@ -59,6 +63,8 @@ public class YamlDocMain {
 			} else {
 				String language = props.getProperty( ARG_LANGUAGE );
 				String labelOverride = props.getProperty( ARG_LABEL_OVVERRIDE );
+				String excludePaths = props.getProperty( ARG_EXCLUDE_PATHS );
+				String excludeSchemas = props.getProperty( ARG_EXCLUDE_SCHEMAS );
 				File inputFile = new File( inputYaml );
 				File outputFile = new File( outputPath );
 				String fileName = outputFile.getName();
@@ -71,6 +77,12 @@ public class YamlDocMain {
 					}
 					if ( StringUtils.isNotEmpty( labelOverride ) ) {
 						config.setLabelsOverride( PropsIO.loadFromFile( labelOverride ) );
+					}
+					if ( StringUtils.isNotEmpty( excludePaths ) ) {
+						config.setExcludePaths( BooleanUtils.isTrue( excludePaths ) );
+					}
+					if ( StringUtils.isNotEmpty( excludeSchemas ) ) {
+						config.setExcludeSchemas( BooleanUtils.isTrue( excludeSchemas ) );
 					}
 					config.setExcelTryAutoresize( BooleanUtils.isTrue( props.getProperty( ARG_EXCEL_TRY_AUTORESIZE, ExcelHelperConsts.PROP_XLS_TRY_AUTORESIZE_DEFAULT ) ) );
 					YamlDocFacade facade = new YamlDocFacade();
@@ -95,6 +107,8 @@ public class YamlDocMain {
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_LANGUAGE, current.getLanguage() );
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_LABEL_OVVERRIDE, current.getLabelsOverride() );
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCEL_TRY_AUTORESIZE, current.getExcelTryAutoresize() );
+	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_PATHS, current.getExcludePaths() );
+	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_SCHEMAS, current.getExcludeSchemas() );
 	                	logger.info( "using parameters -> "+props );
 	                	YamlDocMain.worker( propsCurrent );
 	        		}

@@ -18,6 +18,10 @@ public class OpenapiConfig extends BasicIdConfigType {
 	private String labelsOverride;
 	
 	private String excelTryAutoresize;
+	
+	private String excludePaths;
+	
+	private String excludeSchemas;
 
 	public String getInputYaml() {
 		return inputYaml;
@@ -57,6 +61,22 @@ public class OpenapiConfig extends BasicIdConfigType {
 
 	public void setExcelTryAutoresize(String excelTryAutoresize) {
 		this.excelTryAutoresize = excelTryAutoresize;
+	}
+
+	public String getExcludePaths() {
+		return excludePaths;
+	}
+
+	public void setExcludePaths(String excludePaths) {
+		this.excludePaths = excludePaths;
+	}
+
+	public String getExcludeSchemas() {
+		return excludeSchemas;
+	}
+
+	public void setExcludeSchemas(String excludeSchemas) {
+		this.excludeSchemas = excludeSchemas;
 	}
 	
 }

@@ -62,4 +62,24 @@ public class YamlDocConfig {
 		this.excelTryAutoresize = excelTryAutoresize;
 	}
 	
+	private boolean excludePaths;
+	
+	private boolean excludeSchemas;
+
+	public boolean isExcludePaths() {
+		return excludePaths;
+	}
+
+	public void setExcludePaths(boolean excludePaths) {
+		this.excludePaths = excludePaths;
+	}
+
+	public boolean isExcludeSchemas() {
+		return excludeSchemas;
+	}
+
+	public void setExcludeSchemas(boolean excludeSchemas) {
+		this.excludeSchemas = excludeSchemas;
+	}
+	
 }
