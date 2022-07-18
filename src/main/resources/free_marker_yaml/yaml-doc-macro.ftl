@@ -23,7 +23,7 @@
 		    		<#else>		
 		    			<cell><para></para></cell>
 					</#if>		 
-					<cell><para>${currentFieldValue['example']!''}</para></cell>
+					<cell><para>${printExample(currentFieldValue['example'])}</para></cell>
 					<cell><para>${currentFieldValue['description']!''}</para></cell>
 		    		</row>	    		
 	    		</#list>
