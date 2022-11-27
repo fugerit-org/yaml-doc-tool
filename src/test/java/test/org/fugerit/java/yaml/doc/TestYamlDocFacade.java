@@ -21,32 +21,41 @@ public class TestYamlDocFacade {
 
 	private final static Logger logger = LoggerFactory.getLogger( TestYamlDocFacade.class );
 	
-	//private static final Locale LOCALE = Locale.ENGLISH;
-	private static final Locale LOCALE = Locale.ITALIAN;
+	private static final Locale LOCALE_EN = Locale.ENGLISH;
 	
-	public void testWorkerSample( String outputFormat ) {	
-		try ( Reader reader = new FileReader( "src/test/resources/sample/sample.yaml" );
-				OutputStream os = new FileOutputStream( new File( "target/sample."+outputFormat ) )) {
-			YamlDocConfig config = new YamlDocConfig( outputFormat );
-			config.setLocale( LOCALE );
-			config.setLabelsOverride( PropsIO.loadFromClassLoader( "sample/sample-label-override.properties" ) );
-			config.setExcelTryAutoresize( true );
-			YamlDocFacade facade = new YamlDocFacade();
-			int result = facade.handle(reader, os, config);
-			logger.info( "result -> {}", result );
-		} catch (Exception e) {
-			String message = "Error: "+e.getMessage();
-			logger.error( message, e );
-			fail( message );
+	private static final Locale LOCALE_IT = Locale.ITALIAN;
+	
+	private static final String FILE_ENCODING = "utf-8";
+	
+	public void testWorkerSample( Locale locale, String encoding, String... outputFormats ) {
+		System.setProperty( "file.encoding", FILE_ENCODING );
+		for ( String outputFormat : outputFormats ) {
+			try ( Reader reader = new FileReader( "src/test/resources/sample/sample.yaml" );
+					OutputStream os = new FileOutputStream( new File( "target/sample_"+locale+"."+outputFormat ) )) {
+				YamlDocConfig config = new YamlDocConfig( outputFormat );
+				config.setLocale( locale );
+				config.setLabelsOverride( PropsIO.loadFromClassLoader( "sample/sample-label-override.properties" ) );
+				config.setExcelTryAutoresize( true );
+				YamlDocFacade facade = new YamlDocFacade();
+				int result = facade.handle(reader, os, config);
+				logger.info( "result -> {}", result );
+			} catch (Exception e) {
+				String message = "Error: "+e.getMessage();
+				logger.error( message, e );
+				fail( message );
+			}	
 		}
 	}
 	
 	@Test
-	public void testSample() {
-		this.testWorkerSample( DocConfig.TYPE_XML );
-		this.testWorkerSample( DocConfig.TYPE_FO );
-		this.testWorkerSample( DocConfig.TYPE_PDF );
-		this.testWorkerSample( DocConfig.TYPE_XLSX );
+	public void testSampleEN() {
+		this.testWorkerSample( LOCALE_EN, FILE_ENCODING, DocConfig.TYPE_XML, DocConfig.TYPE_FO, DocConfig.TYPE_PDF, DocConfig.TYPE_XLSX );
 	}
+	
+	@Test
+	public void testSampleIT() {
+		this.testWorkerSample( LOCALE_IT, FILE_ENCODING, DocConfig.TYPE_XML, DocConfig.TYPE_FO, DocConfig.TYPE_PDF, DocConfig.TYPE_XLSX );
+	}
+	
 	
 }
