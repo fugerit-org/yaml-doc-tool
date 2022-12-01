@@ -31,7 +31,7 @@ public class TestYamlDocFacade {
 		System.setProperty( "file.encoding", FILE_ENCODING );
 		for ( String outputFormat : outputFormats ) {
 			try ( Reader reader = new FileReader( "src/test/resources/sample/sample.yaml" );
-					OutputStream os = new FileOutputStream( new File( "target/sample_"+locale+"."+outputFormat ) )) {
+					OutputStream os = new FileOutputStream( new File( "target/sample_facade_"+locale+"."+outputFormat ) )) {
 				YamlDocConfig config = new YamlDocConfig( outputFormat );
 				config.setLocale( locale );
 				config.setLabelsOverride( PropsIO.loadFromClassLoader( "sample/sample-label-override.properties" ) );

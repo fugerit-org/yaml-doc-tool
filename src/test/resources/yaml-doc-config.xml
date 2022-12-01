@@ -1,0 +1,16 @@
+<yaml-doc-config>
+
+	<openapi-catalog id="sample">
+		<openapi id="sample_01"
+			inputYaml="src/test/resources/sample/sample_01.yaml"
+			outputFile="target/sample_01.pdf"
+			useOpenapiTitle="true"
+			/>
+		<openapi id="sample_02"
+			inputYaml="src/test/resources/sample/sample_02.yaml"
+			outputFile="target/sample_02.pdf"
+			useOpenapiTitle="true"
+		/>
+	</openapi-catalog>
+
+</yaml-doc-config>

@@ -11,7 +11,7 @@
 		<relativePath></relativePath>
 	</parent>
 
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<packaging>jar</packaging>
 
 	<name>yaml-doc-tool</name>
@@ -30,9 +30,9 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>
 		<!-- libraries versions -->
-		<fj-version>0.7.6.8</fj-version>
-		<fj-doc-version>0.3.9.2</fj-doc-version>
-		<snake-yaml-version>1.30</snake-yaml-version>
+		<fj-version>0.8.3</fj-version>
+		<fj-doc-version>0.5.5</fj-doc-version>
+		<snake-yaml-version>1.33</snake-yaml-version>
 	</properties>
 
 	<licenses>

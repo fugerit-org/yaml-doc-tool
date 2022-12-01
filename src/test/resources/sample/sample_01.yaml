@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: 'Sample Openapi Document 01'
+  description: 'This is a sample yaml for yaml-doc-tool'
+  version: '1.0.1'
+servers:
+  - url: http://localhost:8080/api
+    description: Sample Development server
+paths:
+  /sample/id/{id}:
+    get:
+      summary: Sample
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string                  
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/SampleResult'                  
+components:
+  schemas:
+    SampleResult:
+      properties:
+        id: 
+          type: string
+          example: '1234'
+          description: 'Id of the sample'
+        sampleTest: 
+          type: string
+          example: 'Sample text'
+          description: 'Sample properties'
+        sampleLevelTwoA:
+          $ref: '#/components/schemas/SampleLevelTwoA'
+        sampleLevelTwoB:
+          $ref: '#/components/schemas/SampleLevelTwoB'
+        sampleLevelTwoC:
+          $ref: '#/components/schemas/SampleLevelTwoC'
+        sampleLevelTwoD:
+          $ref: '#/components/schemas/SampleLevelTwoD'
+        sampleLevelTwoE:
+          $ref: '#/components/schemas/SampleLevelTwoE'
+    SampleLevelTwoA:
+      properties:
+        note: 
+          type: string
+          example: 'Level two notes A'
+          description: 'Level two description'
+    SampleLevelTwoB:
+      properties:
+        note: 
+          type: string
+          example: 'Level two notes B'
+          description: 'Level two description'
+    SampleLevelTwoC:
+      properties:
+        note: 
+          type: string
+          example: 'Level two notes C'
+          description: 'Level two description'
+    SampleLevelTwoD:
+      properties:
+        note: 
+          type: string
+          example: 'Level two notes D'
+          description: 'Level two description'
+    SampleLevelTwoE:
+      properties:
+        note: 
+          type: string
+          example: 'Level two notes E'
+          description: 'Level two description'
+          

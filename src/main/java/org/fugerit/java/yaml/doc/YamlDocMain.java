@@ -101,12 +101,15 @@ public class YamlDocMain {
 			if ( StringUtils.isEmpty( configPath ) || StringUtils.isEmpty( idCatalog ) ) {
 				throw new ConfigException( "Required params : "+ARG_CONFIG_PATH+", "+ARG_ID_CATALOG );
 			} else {
+				logger.info( "configPath:{}, idCatalog:{}", configPath, idCatalog );
 				YamlDocCatalog config = new YamlDocCatalog();
+				String errorsNotes = "Getting configuration";
 				try ( FileInputStream fis = new FileInputStream( new File( configPath ) ) ) {
 					config = (YamlDocCatalog)YamlDocCatalog.load( fis , config );
 	        		logger.info( "keys : "+config.getIdSet() );
 	        		ListMapStringKey<OpenapiConfig> catalog = config.getListMap( idCatalog );
 	        		for ( OpenapiConfig current : catalog ) {
+						errorsNotes = "Handling configuration : "+current.getId();
 	        			Properties propsCurrent = new Properties();
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_INPUT_YAML, current.getInputYaml() );
 	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_OUTPUT_FILE, current.getOutputFile() );
@@ -119,6 +122,8 @@ public class YamlDocMain {
 	                	logger.info( "using parameters -> "+props );
 	                	YamlDocMain.worker( propsCurrent );
 	        		}
+				} catch ( Exception e ) {
+					throw new ConfigException( "Error generation documents ["+errorsNotes+"] -> "+e, e );
 				}
 			}
 		}
