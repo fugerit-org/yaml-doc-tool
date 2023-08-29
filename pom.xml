@@ -33,6 +33,7 @@
 		<fj-version>8.2.0</fj-version>
 		<fj-doc-version>1.5.3</fj-doc-version>
 		<snake-yaml-version>2.2</snake-yaml-version>
+		 <fj-test-helper-version>0.3.1</fj-test-helper-version>   
 	    <!-- sonar cloud configuration -->
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.organization>fugerit-org</sonar.organization>
@@ -125,16 +126,29 @@
 		    <artifactId>log4j-slf4j2-impl</artifactId>
 		</dependency>
 
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.fugerit.java</groupId>
+			<artifactId>fj-test-helper8</artifactId>
+			<version>${fj-test-helper-version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 	</dependencies>

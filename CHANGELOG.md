@@ -1,3 +1,7 @@
+0.4.2 (2023-08-29)
+------------------
+* removed unusued class org.fugerit.java.yaml.doc/FjDocFacade
+
 0.4.1 (2023-08-29)
 ------------------
 * setup for inner fj-doc facade through the new configuration model.
