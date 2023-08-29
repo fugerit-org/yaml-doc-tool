@@ -63,6 +63,11 @@ components:
           type: string
           example: 'Level two notes C'
           description: 'Level two description'
+          deprecated: true
+        description: 
+          type: string
+          example: 'Level two description C'
+          description: 'Level two description'
     SampleLevelTwoD:
       properties:
         note: 

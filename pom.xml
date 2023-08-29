@@ -7,11 +7,11 @@
 	<parent>
 		<groupId>org.fugerit.java</groupId>
 		<artifactId>fj-bom</artifactId>
-		<version>0.2.3</version>
+		<version>1.2.5</version>
 		<relativePath></relativePath>
 	</parent>
 
-	<version>0.3.2</version>
+	<version>0.4.0</version>
 	<packaging>jar</packaging>
 
 	<name>yaml-doc-tool</name>
@@ -30,9 +30,9 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>
 		<!-- libraries versions -->
-		<fj-version>0.8.3</fj-version>
-		<fj-doc-version>0.5.5</fj-doc-version>
-		<snake-yaml-version>1.33</snake-yaml-version>
+		<fj-version>8.2.0</fj-version>
+		<fj-doc-version>1.5.3</fj-doc-version>
+		<snake-yaml-version>2.2</snake-yaml-version>
 	</properties>
 
 	<licenses>
@@ -103,14 +103,22 @@
 			<version>${fj-doc-version}</version>
 		</dependency>
 
+		<dependency> 
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-api</artifactId>
+		</dependency>
+
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>compile</scope>
+			<groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-slf4j-impl</artifactId>
+		    <artifactId>log4j-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-slf4j2-impl</artifactId>
 		</dependency>
 
         <dependency>

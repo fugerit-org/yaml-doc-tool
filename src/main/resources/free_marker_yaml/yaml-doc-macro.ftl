@@ -24,7 +24,7 @@
 		    			<cell><para></para></cell>
 					</#if>		 
 					<cell><para>${printExample(currentFieldValue['example'])}</para></cell>
-					<cell><para>${currentFieldValue['description']!''}</para></cell>
+					<cell><para>${currentFieldValue['description']!''}<#if (currentFieldValue['deprecated']!false)> (${messageFormat(labelMap['table.field.deprecated'])})</#if></para></cell>
 		    		</row>	    		
 	    		</#list>
 </#macro>

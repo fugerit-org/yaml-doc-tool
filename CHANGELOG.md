@@ -1,3 +1,11 @@
+0.4.0 (next)
+------------------
+* Updated fj-core version to 8.2.0
+* Updated fj-doc version to 1.5.3
+* Updated snakeyaml to 2.2
+* Updated fj-vom to to 1.2.5
+* Added support for deprecated openapi attributes (will be added in the description)
+
 0.3.2 (2022-12-01)
 ------------------
 * Changed parent pom version (fj-bom) to 0.2.3

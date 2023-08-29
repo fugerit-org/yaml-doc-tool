@@ -6,7 +6,7 @@
 			param01 is the id of the configuration (every different configuration will be cached)
 			properties are FreeMarker configurations params. 
 		-->
-		<step id="step-01" defaultBehaviour="CONsTINUE"
+		<step id="step-01" defaultBehaviour="CONTINUE"
 			description="FreeMarker Configuration step, only one FreeMarker configuration instance is created for every key under 'param01'" 
 			type="org.fugerit.java.doc.freemarker.config.FreeMarkerConfigStep"
 			param01="QUICKSTART_CONFIG">
