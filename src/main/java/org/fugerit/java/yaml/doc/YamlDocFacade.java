@@ -8,8 +8,9 @@ import java.util.ResourceBundle;
 
 import org.fugerit.java.core.util.PropsIO;
 import org.fugerit.java.core.util.result.Result;
-import org.fugerit.java.doc.base.facade.ProcessDocFacade;
 import org.fugerit.java.doc.base.process.DocProcessContext;
+import org.fugerit.java.doc.freemarker.process.FreemarkerDocProcessConfig;
+import org.fugerit.java.doc.freemarker.process.FreemarkerDocProcessConfigFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -21,6 +22,11 @@ public class YamlDocFacade {
 	private static final String BUNDLE_LABEL_PATH = "lang.label";
 
 	public static final String CHAIN_ID_YAML_DOC_TEMPLATE = "yaml-doc-template";
+	
+	private static final FreemarkerDocProcessConfig INSTANCE = 
+			FreemarkerDocProcessConfigFacade.loadConfigSafe( "cl://doc-facade/fm-process-config-yaml.xml" );
+	
+	private static final boolean VALIDATE_DOC_XML = false;
 	
 	@SuppressWarnings("unchecked")
 	public int handle( Reader inputYaml, OutputStream outputData, YamlDocConfig config ) throws Exception  {
@@ -46,10 +52,9 @@ public class YamlDocFacade {
 		yamlModel.setLabels( labels );
 		yamlModel.setConfig( config );
 		// generation
-		ProcessDocFacade docFacade = FjDocFacade.getInstance();
-		logger.info( "docFacade -> {}", docFacade );
+		logger.info( "docFacade -> {} (validate) {}", INSTANCE, VALIDATE_DOC_XML );
 		DocProcessContext context = DocProcessContext.newContext( YamlModel.ATT_NAME, yamlModel );
-		docFacade.process( CHAIN_ID_YAML_DOC_TEMPLATE, config.getOutputFormat(), context, outputData ); 
+		INSTANCE.process( CHAIN_ID_YAML_DOC_TEMPLATE, config.getOutputFormat(), context, outputData, VALIDATE_DOC_XML ); 
 		return result;
 	}
 	

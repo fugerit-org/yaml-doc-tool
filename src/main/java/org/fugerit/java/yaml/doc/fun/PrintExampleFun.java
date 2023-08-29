@@ -12,7 +12,7 @@ public class PrintExampleFun implements TemplateMethodModelEx {
 	@Override
 	public Object exec(@SuppressWarnings("rawtypes") List arguments) throws TemplateModelException {
 		String res = "";
-		if ( arguments.size() > 0 && arguments.get( 0 ) != null ) {
+		if ( !arguments.isEmpty() && arguments.get( 0 ) != null ) {
 			Object current = arguments.get( 0 );
 			if ( current.getClass().getName().contains( TemplateBooleanModel.class.getSimpleName() ) ) {
 				TemplateBooleanModel template = (TemplateBooleanModel) current;

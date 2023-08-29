@@ -1,3 +1,7 @@
+0.4.1 (2023-08-29)
+------------------
+* setup for inner fj-doc facade through the new configuration model.
+
 0.4.0 (2023-08-29)
 ------------------
 * Updated fj-core version to 8.2.0
