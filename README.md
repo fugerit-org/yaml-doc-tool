@@ -2,6 +2,8 @@
 
 Tool for auto documentation of yaml / openapi
 
+[![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/yaml-doc-tool.svg)](https://mvnrepository.com/artifact/org.fugerit.java/yaml-doc-tool)
+
 **Usage:**  
 
 ```
