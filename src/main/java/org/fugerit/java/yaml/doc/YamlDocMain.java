@@ -55,77 +55,85 @@ public class YamlDocMain {
     	}
     }
 	
+    private static void handleSingleMode( Properties props ) throws Exception {
+		String inputYaml = props.getProperty( ARG_INPUT_YAML );
+		String outputPath = props.getProperty( ARG_OUTPUT_FILE );
+		if ( StringUtils.isEmpty( inputYaml ) || StringUtils.isEmpty( outputPath ) ) {
+			throw new ConfigException( "Required params : "+ARG_INPUT_YAML+", "+ARG_OUTPUT_FILE );
+		} else {
+			String language = props.getProperty( ARG_LANGUAGE );
+			String labelOverride = props.getProperty( ARG_LABEL_OVVERRIDE );
+			String excludePaths = props.getProperty( ARG_EXCLUDE_PATHS );
+			String excludeSchemas = props.getProperty( ARG_EXCLUDE_SCHEMAS );
+			String useOpenapiTitle = props.getProperty( ARG_USE_OPENAPI_TITLE );
+			File inputFile = new File( inputYaml );
+			File outputFile = new File( outputPath );
+			String fileName = outputFile.getName();
+			String outputFormat = fileName.substring( fileName.lastIndexOf( '.' )+1 );
+			try ( Reader reader = new FileReader( inputFile );
+					FileOutputStream fos = new FileOutputStream( outputFile ) ) {
+				YamlDocConfig config = new YamlDocConfig( outputFormat );
+				if ( StringUtils.isNotEmpty( language ) ) {
+					config.setLocale( Locale.forLanguageTag( language ) );
+				}
+				if ( StringUtils.isNotEmpty( labelOverride ) ) {
+					config.setLabelsOverride( PropsIO.loadFromFile( labelOverride ) );
+				}
+				if ( StringUtils.isNotEmpty( excludePaths ) ) {
+					config.setExcludePaths( BooleanUtils.isTrue( excludePaths ) );
+				}
+				if ( StringUtils.isNotEmpty( excludeSchemas ) ) {
+					config.setExcludeSchemas( BooleanUtils.isTrue( excludeSchemas ) );
+				}
+				if ( StringUtils.isNotEmpty( useOpenapiTitle ) ) {
+					config.setUseOpenapiTitle( BooleanUtils.isTrue( useOpenapiTitle ) );
+				}
+				config.setExcelTryAutoresize( BooleanUtils.isTrue( props.getProperty( ARG_EXCEL_TRY_AUTORESIZE, ExcelHelperConsts.PROP_XLS_TRY_AUTORESIZE_DEFAULT ) ) );
+				YamlDocFacade facade = new YamlDocFacade();
+				facade.handle(reader, fos, config);
+			}
+		}	
+    }
+    
+    private static void handleMultiMode( Properties props ) throws Exception {
+    	String configPath = props.getProperty( ARG_CONFIG_PATH );
+		String idCatalog = props.getProperty( ARG_ID_CATALOG );
+		if ( StringUtils.isEmpty( configPath ) || StringUtils.isEmpty( idCatalog ) ) {
+			throw new ConfigException( "Required params : "+ARG_CONFIG_PATH+", "+ARG_ID_CATALOG );
+		} else {
+			logger.info( "configPath:{}, idCatalog:{}", configPath, idCatalog );
+			YamlDocCatalog config = new YamlDocCatalog();
+			String errorsNotes = "Getting configuration";
+			try ( FileInputStream fis = new FileInputStream( new File( configPath ) ) ) {
+				config = (YamlDocCatalog)YamlDocCatalog.load( fis , config );
+        		logger.info( "keys : "+config.getIdSet() );
+        		ListMapStringKey<OpenapiConfig> catalog = config.getListMap( idCatalog );
+        		for ( OpenapiConfig current : catalog ) {
+					errorsNotes = "Handling configuration : "+current.getId();
+        			Properties propsCurrent = new Properties();
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_INPUT_YAML, current.getInputYaml() );
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_OUTPUT_FILE, current.getOutputFile() );
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_LANGUAGE, current.getLanguage() );
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_LABEL_OVVERRIDE, current.getLabelsOverride() );
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCEL_TRY_AUTORESIZE, current.getExcelTryAutoresize() );
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_PATHS, current.getExcludePaths() );
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_SCHEMAS, current.getExcludeSchemas() );
+                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_USE_OPENAPI_TITLE, current.getUseOpenapiTitle() );
+                	logger.info( "using parameters -> "+props );
+                	YamlDocMain.worker( propsCurrent );
+        		}
+			} catch ( Exception e ) {
+				throw new ConfigException( "Error generation documents ["+errorsNotes+"] -> "+e, e );
+			}
+		}
+    }
+    
 	public static void worker( Properties props ) throws Exception {
 		String mode = props.getProperty( ARG_MODE , ARG_MODE_DEFAULT );
 		if ( ARG_MODE_SINGLE.equalsIgnoreCase( mode ) ) {
-			String inputYaml = props.getProperty( ARG_INPUT_YAML );
-			String outputPath = props.getProperty( ARG_OUTPUT_FILE );
-			if ( StringUtils.isEmpty( inputYaml ) || StringUtils.isEmpty( outputPath ) ) {
-				throw new ConfigException( "Required params : "+ARG_INPUT_YAML+", "+ARG_OUTPUT_FILE );
-			} else {
-				String language = props.getProperty( ARG_LANGUAGE );
-				String labelOverride = props.getProperty( ARG_LABEL_OVVERRIDE );
-				String excludePaths = props.getProperty( ARG_EXCLUDE_PATHS );
-				String excludeSchemas = props.getProperty( ARG_EXCLUDE_SCHEMAS );
-				String useOpenapiTitle = props.getProperty( ARG_USE_OPENAPI_TITLE );
-				File inputFile = new File( inputYaml );
-				File outputFile = new File( outputPath );
-				String fileName = outputFile.getName();
-				String outputFormat = fileName.substring( fileName.lastIndexOf( '.' )+1 );
-				try ( Reader reader = new FileReader( inputFile );
-						FileOutputStream fos = new FileOutputStream( outputFile ) ) {
-					YamlDocConfig config = new YamlDocConfig( outputFormat );
-					if ( StringUtils.isNotEmpty( language ) ) {
-						config.setLocale( Locale.forLanguageTag( language ) );
-					}
-					if ( StringUtils.isNotEmpty( labelOverride ) ) {
-						config.setLabelsOverride( PropsIO.loadFromFile( labelOverride ) );
-					}
-					if ( StringUtils.isNotEmpty( excludePaths ) ) {
-						config.setExcludePaths( BooleanUtils.isTrue( excludePaths ) );
-					}
-					if ( StringUtils.isNotEmpty( excludeSchemas ) ) {
-						config.setExcludeSchemas( BooleanUtils.isTrue( excludeSchemas ) );
-					}
-					if ( StringUtils.isNotEmpty( useOpenapiTitle ) ) {
-						config.setUseOpenapiTitle( BooleanUtils.isTrue( useOpenapiTitle ) );
-					}
-					config.setExcelTryAutoresize( BooleanUtils.isTrue( props.getProperty( ARG_EXCEL_TRY_AUTORESIZE, ExcelHelperConsts.PROP_XLS_TRY_AUTORESIZE_DEFAULT ) ) );
-					YamlDocFacade facade = new YamlDocFacade();
-					facade.handle(reader, fos, config);
-				}
-			}	
+			handleSingleMode(props);
 		} else {
-			String configPath = props.getProperty( ARG_CONFIG_PATH );
-			String idCatalog = props.getProperty( ARG_ID_CATALOG );
-			if ( StringUtils.isEmpty( configPath ) || StringUtils.isEmpty( idCatalog ) ) {
-				throw new ConfigException( "Required params : "+ARG_CONFIG_PATH+", "+ARG_ID_CATALOG );
-			} else {
-				logger.info( "configPath:{}, idCatalog:{}", configPath, idCatalog );
-				YamlDocCatalog config = new YamlDocCatalog();
-				String errorsNotes = "Getting configuration";
-				try ( FileInputStream fis = new FileInputStream( new File( configPath ) ) ) {
-					config = (YamlDocCatalog)YamlDocCatalog.load( fis , config );
-	        		logger.info( "keys : "+config.getIdSet() );
-	        		ListMapStringKey<OpenapiConfig> catalog = config.getListMap( idCatalog );
-	        		for ( OpenapiConfig current : catalog ) {
-						errorsNotes = "Handling configuration : "+current.getId();
-	        			Properties propsCurrent = new Properties();
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_INPUT_YAML, current.getInputYaml() );
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_OUTPUT_FILE, current.getOutputFile() );
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_LANGUAGE, current.getLanguage() );
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_LABEL_OVVERRIDE, current.getLabelsOverride() );
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCEL_TRY_AUTORESIZE, current.getExcelTryAutoresize() );
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_PATHS, current.getExcludePaths() );
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_SCHEMAS, current.getExcludeSchemas() );
-	                	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_USE_OPENAPI_TITLE, current.getUseOpenapiTitle() );
-	                	logger.info( "using parameters -> "+props );
-	                	YamlDocMain.worker( propsCurrent );
-	        		}
-				} catch ( Exception e ) {
-					throw new ConfigException( "Error generation documents ["+errorsNotes+"] -> "+e, e );
-				}
-			}
+			handleMultiMode(props);
 		}
 	}
 	
