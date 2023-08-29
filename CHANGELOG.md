@@ -1,4 +1,4 @@
-0.4.0 (next)
+0.4.0 (2023-08-29)
 ------------------
 * Updated fj-core version to 8.2.0
 * Updated fj-doc version to 1.5.3
