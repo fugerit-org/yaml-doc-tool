@@ -107,7 +107,7 @@ public class YamlDocMain {
 			String errorsNotes = "Getting configuration";
 			try ( FileInputStream fis = new FileInputStream( new File( configPath ) ) ) {
 				config = (YamlDocCatalog)GenericListCatalogConfig.load( fis , config );
-        		logger.info( "keys : "+config.getIdSet() );
+        		logger.info( "keys : {}", config.getIdSet() );
         		ListMapStringKey<OpenapiConfig> catalog = config.getListMap( idCatalog );
         		for ( OpenapiConfig current : catalog ) {
 					errorsNotes = "Handling configuration : "+current.getId();
@@ -120,7 +120,7 @@ public class YamlDocMain {
                 	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_PATHS, current.getExcludePaths() );
                 	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_SCHEMAS, current.getExcludeSchemas() );
                 	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_USE_OPENAPI_TITLE, current.getUseOpenapiTitle() );
-                	logger.info( "using parameters -> "+props );
+                	logger.info( "using parameters -> {}", props );
                 	YamlDocMain.worker( propsCurrent );
         		}
 			} catch ( Exception e ) {

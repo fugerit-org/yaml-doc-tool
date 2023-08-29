@@ -14,7 +14,7 @@
 				version="2.3.30"
 				path="/free_marker_yaml"
 				mode="class" 
-				class="org.fugerit.java.yaml.doc.FjDocFacade"
+				class="org.fugerit.java.yaml.doc.YamlDocConfig"
 				exception-handler="RETHROW_HANDLER"
 				log-exception="false"
 				wrap-unchecked-exceptions="true"
