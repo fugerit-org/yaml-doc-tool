@@ -1,6 +1,7 @@
 0.4.2 (2023-08-29)
 ------------------
-* removed unusued class org.fugerit.java.yaml.doc/FjDocFacade
+* removed unused class org.fugerit.java.yaml.doc/FjDocFacade
+* more extensive testing
 
 0.4.1 (2023-08-29)
 ------------------
