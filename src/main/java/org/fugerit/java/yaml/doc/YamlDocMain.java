@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.cfg.xml.GenericListCatalogConfig;
 import org.fugerit.java.core.cli.ArgUtils;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.core.lang.helpers.StringUtils;
@@ -105,7 +106,7 @@ public class YamlDocMain {
 			YamlDocCatalog config = new YamlDocCatalog();
 			String errorsNotes = "Getting configuration";
 			try ( FileInputStream fis = new FileInputStream( new File( configPath ) ) ) {
-				config = (YamlDocCatalog)YamlDocCatalog.load( fis , config );
+				config = (YamlDocCatalog)GenericListCatalogConfig.load( fis , config );
         		logger.info( "keys : "+config.getIdSet() );
         		ListMapStringKey<OpenapiConfig> catalog = config.getListMap( idCatalog );
         		for ( OpenapiConfig current : catalog ) {
