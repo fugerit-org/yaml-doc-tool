@@ -33,6 +33,10 @@
 		<fj-version>8.2.0</fj-version>
 		<fj-doc-version>1.5.3</fj-doc-version>
 		<snake-yaml-version>2.2</snake-yaml-version>
+	    <!-- sonar cloud configuration -->
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.organization>fugerit-org</sonar.organization>
+		<sonar.projectKey>fugerit-org_yaml-doc-tool</sonar.projectKey>
 	</properties>
 
 	<licenses>
