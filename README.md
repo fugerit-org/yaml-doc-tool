@@ -15,7 +15,7 @@ java -jar dist-yaml-doc-tool-X.X.X.jar --input-yaml [path-to-openapi]\
 										
 **example :**  
 
-java -jar dist-yaml-doc-tool-0.3.0.jar --input-yaml sample.yaml --output-file sample.pdf --language it
+java -jar dist-yaml-doc-tool-X.X.X.jar --input-yaml sample.yaml --output-file sample.pdf --language it
 
 **output-file**   
 currently supported extensions : pdf, xlsx, xml, fo
