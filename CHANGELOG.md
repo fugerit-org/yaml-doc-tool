@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [workflow sonar cloud](.github/workflows/sonarcloud-maven.yml)
 - fj-bom version set to 1.4.0
 - fj-core version set to 8.3.7
-- fj-doc version set to 8.3.7
+- fj-doc version set to 3.0.7
 
 0.4.2 (2023-08-29)
 ------------------
