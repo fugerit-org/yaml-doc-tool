@@ -7,11 +7,11 @@
 	<parent>
 		<groupId>org.fugerit.java</groupId>
 		<artifactId>fj-bom</artifactId>
-		<version>1.2.5</version>
+		<version>1.4.0</version>
 		<relativePath></relativePath>
 	</parent>
 
-	<version>0.4.2</version>
+	<version>0.5.0</version>
 	<packaging>jar</packaging>
 
 	<name>yaml-doc-tool</name>
@@ -30,10 +30,9 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>
 		<!-- libraries versions -->
-		<fj-version>8.2.0</fj-version>
-		<fj-doc-version>1.5.3</fj-doc-version>
-		<snake-yaml-version>2.2</snake-yaml-version>
-		 <fj-test-helper-version>0.3.1</fj-test-helper-version>   
+		<fj-version>8.3.7</fj-version>
+		<fj-doc-version>3.0.7</fj-doc-version>
+		<snake-yaml-version>2.2</snake-yaml-version>   
 	    <!-- sonar cloud configuration -->
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.organization>fugerit-org</sonar.organization>
@@ -141,7 +140,6 @@
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-test-helper8</artifactId>
-			<version>${fj-test-helper-version}</version>
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
