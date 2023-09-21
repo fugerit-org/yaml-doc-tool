@@ -13,4 +13,18 @@
 		/>
 	</openapi-catalog>
 
+	<openapi-catalog id="sample_it">
+		<openapi id="sample_01_it"
+			inputYaml="src/test/resources/sample/sample_01.yaml"
+			outputFile="target/sample_01_it.pdf"
+			useOpenapiTitle="true"
+			language="it"
+			labelsOverride="src/test/resources/override/label_it.properties"
+			excelTryAutoresize="true"
+			excludeSchemas="true"
+			excludePaths="false"
+			/>
+		/>
+	</openapi-catalog>
+
 </yaml-doc-config>
