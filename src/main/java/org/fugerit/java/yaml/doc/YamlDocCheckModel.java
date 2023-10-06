@@ -93,7 +93,7 @@ public class YamlDocCheckModel {
 	
 	@SuppressWarnings("unchecked")
 	public static int handleModelCheck( Properties props ) throws ConfigException {
-		SimpleValue<Integer> res = new SimpleValue<Integer>( Result.RESULT_CODE_OK );
+		SimpleValue<Integer> res = new SimpleValue<>( Result.RESULT_CODE_OK );
 		String inputYaml = props.getProperty( YamlDocMain.ARG_INPUT_YAML );
 		String checkType = props.getProperty( ARG_CHECK_TYPE );
 		String checkSchema = props.getProperty( ARG_CHECK_SCHEMA );
