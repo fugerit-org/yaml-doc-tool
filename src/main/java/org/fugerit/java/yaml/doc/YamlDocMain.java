@@ -43,6 +43,7 @@ public class YamlDocMain {
 	public static final String ARG_MODE = "mode";
 	public static final String ARG_MODE_SINGLE = "single";
 	public static final String ARG_MODE_CONFIG = "config";
+	public static final String ARG_MODE_CHECK_MODEL = "check-model";
 	public static final String ARG_MODE_DEFAULT = ARG_MODE_SINGLE;
 	
 	public static final String ARG_CONFIG_PATH = "config-path";
@@ -138,6 +139,8 @@ public class YamlDocMain {
 		String mode = props.getProperty( ARG_MODE , ARG_MODE_DEFAULT );
 		if ( ARG_MODE_SINGLE.equalsIgnoreCase( mode ) ) {
 			handleSingleMode(props);
+		} else if ( ARG_MODE_CHECK_MODEL.equalsIgnoreCase( mode ) ) {
+			YamlDocCheckModel.handleModelCheck(props);
 		} else {
 			handleMultiMode(props);
 		}
