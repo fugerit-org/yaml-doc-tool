@@ -21,6 +21,7 @@ public class TestYamlDocCheckModel {
 		params.setProperty( YamlDocMain.ARG_INPUT_YAML , "src/test/resources/sample/sample.yaml" );
 		params.setProperty( YamlDocCheckModel.ARG_CHECK_SCHEMA , SampleResult.class.getSimpleName() );
 		params.setProperty( YamlDocCheckModel.ARG_CHECK_TYPE , SampleResult.class.getName() );
+		params.setProperty( YamlDocMain.ARG_OUTPUT_FILE , "target/report.md" );
 		int res = YamlDocCheckModel.handleModelCheck(params);
 		Assert.assertEquals( Result.RESULT_CODE_OK , res );
 	}
@@ -38,17 +39,30 @@ public class TestYamlDocCheckModel {
 	}
 	
 	@Test
+	public void testKo2() throws ConfigException {
+		Properties params = new Properties();
+		params.setProperty( YamlDocMain.ARG_INPUT_YAML , "src/test/resources/sample/sample_check2.yaml" );
+		params.setProperty( YamlDocCheckModel.ARG_CHECK_SCHEMA , SampleResult.class.getSimpleName() );
+		params.setProperty( YamlDocCheckModel.ARG_CHECK_TYPE , SampleResult.class.getName() );
+		params.setProperty( YamlDocCheckModel.ARG_CHECK_ONCE , BooleanUtils.BOOLEAN_TRUE );
+		params.setProperty( YamlDocCheckModel.ARG_PRINT_ONLY_KO , BooleanUtils.BOOLEAN_TRUE );
+		int res = YamlDocCheckModel.handleModelCheck(params);
+		Assert.assertNotEquals( Result.RESULT_CODE_OK , res );
+	}
+	
+	@Test
 	public void testNoParam() throws ConfigException {
 		Properties params = new Properties();
 		Assert.assertThrows( ConfigException.class , () -> YamlDocCheckModel.handleModelCheck(params) );
 		params.setProperty( YamlDocMain.ARG_INPUT_YAML , "src/test/resources/sample/sample_check1.yaml" );
 		Assert.assertThrows( ConfigException.class , () -> YamlDocCheckModel.handleModelCheck(params) );
-		params.setProperty( YamlDocCheckModel.ARG_CHECK_SCHEMA , SampleResult.class.getSimpleName() );
-		Assert.assertThrows( ConfigException.class , () -> YamlDocCheckModel.handleModelCheck(params) );
 		params.setProperty( YamlDocCheckModel.ARG_CHECK_TYPE , "not found" );
+		Assert.assertThrows( ConfigException.class , () -> YamlDocCheckModel.handleModelCheck(params) );
+		params.setProperty( YamlDocCheckModel.ARG_CHECK_SCHEMA , SampleResult.class.getSimpleName() );
 		Assert.assertThrows( ConfigException.class , () -> YamlDocCheckModel.handleModelCheck(params) );
 		params.setProperty( YamlDocCheckModel.ARG_CHECK_SCHEMA , "not found" );
 		Assert.assertThrows( ConfigException.class , () -> YamlDocCheckModel.handleModelCheck(params) );
+		
 	}
 	
 	@Test

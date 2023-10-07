@@ -7,11 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1] - 2023-10-07
+
+### Added
+
+- outputFile param to produce report on file
+- code of conduct
+- build and run badges
+
+### Changed
+
+- markdwon heading on report
+
 ## [0.6.0] - 2023-10-07
 
 ### Added
 
-- Add schema check vs implementation test (#1)
+- new mode : schema check vs implementation test (#1)
 
 ## [0.5.0] - 2023-09-21
 
