@@ -30,7 +30,9 @@ java -jar dist-yaml-doc-tool-*.jar --input-yaml [path-to-openapi] \
 										
 **example :**  
 
-java -jar dist-yaml-doc-tool-X.X.X.jar --input-yaml sample.yaml --output-file sample.pdf --language it
+```
+java -jar dist-yaml-doc-tool-*.jar --input-yaml sample.yaml --output-file sample.pdf --language it
+```
 
 **output-file**   
 currently supported extensions : pdf, xlsx, xml, fo
