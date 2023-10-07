@@ -2,12 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>org.fugerit.java</groupId>
 	<artifactId>yaml-doc-tool</artifactId>
 
 	<parent>
-		<groupId>org.fugerit.java</groupId>
-		<artifactId>fj-bom</artifactId>
-		<version>1.4.0</version>
+		<groupId>org.fugerit.java.universe</groupId>
+		<artifactId>fj-universe-tool</artifactId>
+		<version>0.5.2</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -21,22 +22,26 @@
 	<scm>
 		<connection>scm:git:git://github.com/fugerit-org/yaml-doc-tool.git</connection>
 		<developerConnection>scm:git:ssh://github.com/fugerit-org/yaml-doc-tool.git</developerConnection>
-		<url>http://github.com/fugerit-org/yaml-doc-tool/tree/main</url>
+		<url>https://github.com/fugerit-org/yaml-doc-tool.git</url>
+		<tag>HEAD</tag>
 	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/fugerit-org/yaml-doc-tool/issues</url>
+	</issueManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java-version-compliance>1.8</java-version-compliance>
-	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
-	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>
+		<java-version-compliance>8</java-version-compliance>
 		<!-- libraries versions -->
-		<fj-version>8.3.7</fj-version>
-		<fj-doc-version>3.0.7</fj-doc-version>
 		<snake-yaml-version>2.2</snake-yaml-version>   
 	    <!-- sonar cloud configuration -->
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.organization>fugerit-org</sonar.organization>
 		<sonar.projectKey>fugerit-org_yaml-doc-tool</sonar.projectKey>
+		<!-- tool main class -->
+		<tool-main-class>org.fugerit.java.yaml.doc.YamlDocMain</tool-main-class>
 	</properties>
 
 	<licenses>
@@ -80,55 +85,26 @@
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-core</artifactId>
-			<version>${fj-version}</version>
 		</dependency>
 	
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-base</artifactId>
-			<version>${fj-doc-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-freemarker</artifactId>
-			<version>${fj-doc-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-mod-fop</artifactId>
-			<version>${fj-doc-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-mod-poi</artifactId>
-			<version>${fj-doc-version}</version>
-		</dependency>
-
-		<dependency> 
-		  <groupId>org.slf4j</groupId>
-		  <artifactId>slf4j-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-api</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-slf4j2-impl</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -153,12 +129,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-test-helper8</artifactId>
 			<scope>test</scope>
@@ -172,58 +142,8 @@
 
 	</dependencies>
 
-	<profiles>
-
-		<profile>
-			<id>singlepackage</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jar-plugin</artifactId>
-						<version>3.0.2</version>
-						<configuration>
-							<archive>
-								<manifest>
-									<addClasspath>true</addClasspath>
-									<mainClass>org.fugerit.java.yaml.doc.YamlDocMain</mainClass>
-								</manifest>
-							</archive>
-						</configuration>
-					</plugin>				
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-						<version>3.1.0</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>shade</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<finalName>dist-${project.artifactId}-${project.version}</finalName>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
-	<reporting>
-	    <plugins>
-	      <plugin>
-	        <groupId>org.apache.maven.plugins</groupId>
-	        <artifactId>maven-changelog-plugin</artifactId>
-	        <version>2.3</version>
-	      </plugin>
-	    </plugins>
-	  </reporting>
-
 	<organization>
-		<url>http://www.fugerit.org</url>
+		<url>http://www.fug	erit.org</url>
 		<name>Fugerit</name>
 	</organization>
 		

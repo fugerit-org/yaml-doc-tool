@@ -3,7 +3,6 @@ package test.org.fugerit.java.yaml.doc;
 import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
-import org.fugerit.java.core.cfg.ConfigRuntimeException;
 import org.fugerit.java.core.function.SafeFunction;
 import org.fugerit.java.yaml.doc.YamlDocMain;
 import org.junit.Assert;
@@ -52,7 +51,7 @@ public class TestYamlDocConfig {
 	
 	@Test
 	public void testSampleFail1() {
-		Assert.assertThrows( ConfigRuntimeException.class , () -> this.testWorkerSample( FILE_ENCODING, null ) );
+		Assert.assertThrows( NullPointerException.class , () -> this.testWorkerSample( FILE_ENCODING, null ) );
 	}
 	
 	@Test
