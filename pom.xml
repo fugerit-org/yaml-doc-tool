@@ -12,7 +12,7 @@
 		<relativePath></relativePath>
 	</parent>
 
-	<version>0.7.0-universe.1</version>
+	<version>0.7.0</version>
 	<packaging>jar</packaging>
 
 	<name>yaml-doc-tool</name>
