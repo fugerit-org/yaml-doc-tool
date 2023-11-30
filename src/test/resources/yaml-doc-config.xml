@@ -24,6 +24,26 @@
 			excludeSchemas="true"
 			excludePaths="false"
 			/>
+		<openapi id="sample_it_v0"
+			inputYaml="src/test/resources/sample/sample.yaml"
+			outputFile="target/sample_it_v0.pdf"
+			useOpenapiTitle="true"
+			language="it"
+			excelTryAutoresize="true"
+			excludeSchemas="false"
+			excludePaths="false" 
+			version="0"
+			/>
+		<openapi id="sample_it_v1"
+			inputYaml="src/test/resources/sample/sample.yaml"
+			outputFile="target/sample_it_v1.pdf"
+			useOpenapiTitle="true"
+			language="it"
+			excelTryAutoresize="true"
+			excludeSchemas="false"
+			excludePaths="false" 
+			version="1"
+			/>
 		/>
 	</openapi-catalog>
 

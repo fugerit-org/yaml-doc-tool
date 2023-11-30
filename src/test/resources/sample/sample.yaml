@@ -51,6 +51,14 @@ components:
           type: string
           example: 'Level two notes A'
           description: 'Level two description'
+          minLength: 1
+          maxLength: 5
+        count: 
+          type: number
+          example: 100
+          description: 'Level two count'
+          minimum: 0
+          maximum: 99999
     SampleLevelTwoB:
       properties:
         note: 

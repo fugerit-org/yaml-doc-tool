@@ -20,12 +20,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 /**
  * SampleLevelTwoA
  */
-
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2023-10-06T19:43:41.743004107Z[GMT]")
-
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2023-11-30T10:47:05.392595294Z[GMT]")
 public class SampleLevelTwoA {
   @SerializedName("note")
   private String note = null;
+
+  @SerializedName("count")
+  private String count = null;
 
   public SampleLevelTwoA note(String note) {
     this.note = note;
@@ -45,6 +46,24 @@ public class SampleLevelTwoA {
     this.note = note;
   }
 
+  public SampleLevelTwoA count(String count) {
+    this.count = count;
+    return this;
+  }
+
+   /**
+   * Level two description
+   * @return count
+  **/
+  @Schema(example = "Level two notes A", description = "Level two description")
+  public String getCount() {
+    return count;
+  }
+
+  public void setCount(String count) {
+    this.count = count;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -55,12 +74,13 @@ public class SampleLevelTwoA {
       return false;
     }
     SampleLevelTwoA sampleLevelTwoA = (SampleLevelTwoA) o;
-    return Objects.equals(this.note, sampleLevelTwoA.note);
+    return Objects.equals(this.note, sampleLevelTwoA.note) &&
+        Objects.equals(this.count, sampleLevelTwoA.count);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(note);
+    return Objects.hash(note, count);
   }
 
 
@@ -70,6 +90,7 @@ public class SampleLevelTwoA {
     sb.append("class SampleLevelTwoA {\n");
     
     sb.append("    note: ").append(toIndentedString(note)).append("\n");
+    sb.append("    count: ").append(toIndentedString(count)).append("\n");
     sb.append("}");
     return sb.toString();
   }

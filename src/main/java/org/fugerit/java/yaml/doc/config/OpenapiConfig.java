@@ -24,6 +24,8 @@ public class OpenapiConfig extends BasicIdConfigType {
 	private String excludeSchemas;
 	
 	private String useOpenapiTitle;
+	
+	private String version;
 
 	public String getInputYaml() {
 		return inputYaml;
@@ -87,6 +89,14 @@ public class OpenapiConfig extends BasicIdConfigType {
 
 	public void setUseOpenapiTitle(String useOpenapiTitle) {
 		this.useOpenapiTitle = useOpenapiTitle;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 	
 }

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2023-11-30
+
+### Added
+
+- handling of template version (currently 0 - legacy, 1, this release)
+- handling of constraints minLength, maxLength, minimum and maximum for [OpenAPI data types](https://swagger.io/docs/specification/data-models/data-types/)
+
 ### Changed
 
 - parent changed from fj-bom to fj-universe-tool 0.5.6

@@ -73,4 +73,17 @@ java -jar dist-yaml-doc-tool-*.jar 		--mode [check-model] \
 										--output-file [output-file] \
 										--check-type [java type to check] \
 										--check-schema [openapi schema to check]
+										--version [model-version]
 ```
+
+## Model version info (param "version")
+
+### Version 0 - legacy version (up to 1.0.0 excluded)
+
+### Version 1
+
+handling handling of constraints [OpenAPI data types](https://swagger.io/docs/specification/data-models/data-types/)
+ - minLength
+ - maxLength
+ - minimum
+ - maximum 

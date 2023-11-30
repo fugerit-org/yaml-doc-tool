@@ -19,7 +19,7 @@
 	<info name="doc-title">${messageFormat(labels['doc.def.title'])}</info>
 	<info name="doc-author">${messageFormat(labels['doc.def.author'])}</info>
 	<info name="doc-subject">${messageFormat(labels['doc.def.subject'])}</info>
-	<info name="doc-creator">Fugerit - Yaml Doc Tool</info>
+	<info name="doc-creator">Fugerit - Yaml Doc Tool (model version : ${yamlModel.config.version})</info>
 	<info name="doc-language">${yamlModel.config.languageCode}</info>		  	
   
   	<!-- specific properties for PDF -->
@@ -98,14 +98,14 @@
 									<cell colspan="3"><para>${listAllOf['type']}</para></cell>
 								</row>
 								<#if (listAllOf['properties'])?? >
-									<@docMacro.printProperties propsMap=listAllOf['properties'] labelMap=labels/>
+									<@docMacro.printProperties propsMap=listAllOf['properties'] labelMap=labels version=yamlModel.config.version/>
 								</#if>
 							</#if>
 						</#list>
 	
 					</#if>
 					<#if (currentSchemaValue['properties'])?? >
-						<@docMacro.printProperties propsMap=currentSchemaValue['properties'] labelMap=labels/>
+						<@docMacro.printProperties propsMap=currentSchemaValue['properties'] labelMap=labels version=yamlModel.config.version/>
 					</#if>
 		    	</table>
 			</#list> 

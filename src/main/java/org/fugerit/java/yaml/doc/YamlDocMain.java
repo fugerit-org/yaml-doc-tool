@@ -54,6 +54,8 @@ public class YamlDocMain {
 	
 	public static final String ARG_USE_OPENAPI_TITLE = "use-openapi-title";
 	
+	public static final String ARG_VERSION = "version";
+	
     private static void addIfNotEmpty( Properties props, String key, String value ) {
     	if ( StringUtils.isNotEmpty( value ) ) {
     		props.setProperty( key , value );
@@ -66,6 +68,7 @@ public class YamlDocMain {
 		String excludePaths = props.getProperty( ARG_EXCLUDE_PATHS );
 		String excludeSchemas = props.getProperty( ARG_EXCLUDE_SCHEMAS );
 		String useOpenapiTitle = props.getProperty( ARG_USE_OPENAPI_TITLE );
+		String version = props.getProperty( ARG_VERSION );
 		if ( StringUtils.isNotEmpty( language ) ) {
 			config.setLocale( Locale.forLanguageTag( language ) );
 		}
@@ -80,6 +83,9 @@ public class YamlDocMain {
 		}
 		if ( StringUtils.isNotEmpty( useOpenapiTitle ) ) {
 			config.setUseOpenapiTitle( BooleanUtils.isTrue( useOpenapiTitle ) );
+		}
+		if ( StringUtils.isNotEmpty( version ) ) {
+			config.setVersion( Integer.parseInt( version ) );
 		}
     }
     
@@ -129,6 +135,7 @@ public class YamlDocMain {
                     	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_PATHS, current.getExcludePaths() );
                     	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_EXCLUDE_SCHEMAS, current.getExcludeSchemas() );
                     	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_USE_OPENAPI_TITLE, current.getUseOpenapiTitle() );
+                    	addIfNotEmpty(propsCurrent, YamlDocMain.ARG_VERSION, current.getVersion() );
                     	logger.info( "using parameters -> {}", props );
                     	YamlDocMain.worker( propsCurrent );
             		}

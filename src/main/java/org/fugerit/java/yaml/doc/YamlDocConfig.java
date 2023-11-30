@@ -5,15 +5,22 @@ import java.util.Properties;
 
 public class YamlDocConfig {
 
+	public static final Integer VERSION_0 = 0;
+	public static final Integer VERSION_1 = 1;
+	public static final Integer VERSION_DEFAULT = VERSION_1;	// default version is last version
+	
 	public YamlDocConfig() {
 		this.locale = Locale.getDefault();
 		if ( this.locale == null ) {
 			this.locale = Locale.ENGLISH;
 		}
+		this.version = VERSION_DEFAULT;
 		this.labelsOverride = new Properties();
 	}
 	
 	private String outputFormat;
+	
+	private Integer version;
 
 	public String getOutputFormat() {
 		return outputFormat;
@@ -90,6 +97,14 @@ public class YamlDocConfig {
 
 	public void setUseOpenapiTitle(boolean useOpenapiTitle) {
 		this.useOpenapiTitle = useOpenapiTitle;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	
 }
