@@ -85,6 +85,12 @@
 							<cell colspan="3"><para>${currentSchemaValue['description']}</para></cell>
 						</row>
 					</#if>
+					<#if (currentSchemaValue['$ref'])?? >
+						<row>
+							<cell><para style="bold">${messageFormat(labels['type.extends'])}</para></cell>
+							<cell colspan="3"><para>${currentSchemaValue['$ref']}</para></cell>
+						</row>
+					</#if>
 					<#if (currentSchemaValue['allOf'])?? >
 						<#list currentSchemaValue['allOf'] as listAllOf>
 							<#if (listAllOf['$ref'])?? >
@@ -102,7 +108,6 @@
 								</#if>
 							</#if>
 						</#list>
-	
 					</#if>
 					<#if (currentSchemaValue['properties'])?? >
 						<@docMacro.printProperties propsMap=currentSchemaValue['properties'] labelMap=labels version=yamlModel.config.version/>
