@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- parent changed from fj-bom to fj-universe-tool 1.0.1
+- parent changed from fj-bom to fj-universe-tool 2.3.3
+
+### Fixed
+
+- Handling $ref to other object in schemas [#5](https://github.com/fugerit-org/yaml-doc-tool/issues/5)
 
 ## [1.0.0] - 2023-11-30
 

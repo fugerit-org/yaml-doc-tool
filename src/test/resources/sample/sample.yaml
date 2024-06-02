@@ -83,4 +83,12 @@ components:
           type: string
           example: 'Level two notes E'
           description: 'Level two description'
-          
+    SampleLevelTwoRef1:
+      $ref: '#/components/schemas/SampleLevelTwoE'
+      properties:
+        noteTest:
+          type: string
+          example: 'Level two notes Ref 1'
+          description: 'Level two description'
+    SampleLevelTwoRef2:
+      $ref: '#/components/schemas/SampleLevelTwoD'
