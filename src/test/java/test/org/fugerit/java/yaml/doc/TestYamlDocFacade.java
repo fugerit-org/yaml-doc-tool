@@ -30,7 +30,7 @@ public class TestYamlDocFacade {
 	public boolean testWorkerSample( Locale locale, String encoding, String... outputFormats )  {
 		return SafeFunction.get( () -> {
 			boolean ok = false;
-			System.setProperty( "file.encoding", FILE_ENCODING );
+			System.setProperty( "file.encoding", encoding );
 			for ( String outputFormat : outputFormats ) {
 				try ( Reader reader = new FileReader( "src/test/resources/sample/sample.yaml" );
 						OutputStream os = new FileOutputStream( new File( "target/sample_facade_"+locale+"."+outputFormat ) )) {

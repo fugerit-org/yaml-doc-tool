@@ -51,7 +51,7 @@ public class TestYamlDocCheckModel {
 	}
 	
 	@Test
-	public void testNoParam() throws ConfigException {
+	public void testNoParam() {
 		Properties params = new Properties();
 		Assert.assertThrows( ConfigException.class , () -> YamlDocCheckModel.handleModelCheck(params) );
 		params.setProperty( YamlDocMain.ARG_INPUT_YAML , "src/test/resources/sample/sample_check1.yaml" );
