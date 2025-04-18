@@ -20,6 +20,8 @@
 		    			<#if currentType = 'array' >
 		    				<#if currentFieldValue['items']['$ref']?? >
 		    					<#assign arrayType=currentFieldValue['items']['$ref']/>
+							<#elseif currentFieldValue['items']['type']??>
+								<#assign arrayType=currentFieldValue['items']['type']/>
 		    				</#if>			
 		    				<#assign currentType>${currentType}[${arrayType!''}]</#assign>
 		    			</#if>
