@@ -10,7 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - SnakeYAML version 2.4
-- parent changed from fj-bom to fj-universe-tool 2.4.4
+- parent changed from fj-bom to fj-universe-tool 2.4.5
+
+### Removed
+
+- [workflow sonar cloud](.github/workflows/sonarcloud-maven.yml)
+
+### Fixed
+
+- fix for simple type array documentation <https://github.com/fugerit-org/yaml-doc-tool/issues/8>
 
 ## [1.0.2] - 2024-10-25
 

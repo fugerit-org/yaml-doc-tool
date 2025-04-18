@@ -10,28 +10,28 @@ paths:
   /sample/id/{id}:
     get:
       summary: Sample
-      parameters: 
+      parameters:
         - name: id
           in: path
           required: true
           schema:
-            type: string                  
+            type: string
       responses:
         '200':
           description: Ok
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/SampleResult'                  
+                $ref: '#/components/schemas/SampleResult'
 components:
   schemas:
     SampleResult:
       properties:
-        id: 
+        id:
           type: string
           example: '1234'
           description: 'Id of the sample'
-        sampleTest: 
+        sampleTest:
           type: string
           example: 'Sample text'
           description: 'Sample properties'
@@ -47,13 +47,13 @@ components:
           $ref: '#/components/schemas/SampleLevelTwoE'
     SampleLevelTwoA:
       properties:
-        note: 
+        note:
           type: string
           example: 'Level two notes A'
           description: 'Level two description'
           minLength: 1
           maxLength: 5
-        count: 
+        count:
           type: number
           example: 100
           description: 'Level two count'
@@ -61,34 +61,48 @@ components:
           maximum: 99999
     SampleLevelTwoB:
       properties:
-        note: 
+        note:
           type: string
           example: 'Level two notes B'
           description: 'Level two description'
     SampleLevelTwoC:
       properties:
-        note: 
+        note:
           type: string
           example: 'Level two notes C'
           description: 'Level two description'
     SampleLevelTwoD:
       properties:
-        note: 
+        note:
           type: string
           example: 'Level two notes D'
           description: 'Level two description'
     SampleLevelTwoE:
       properties:
-        note: 
+        note:
           type: string
           example: 'Level two notes E'
           description: 'Level two description'
     SampleLevelTwoRef1:
       $ref: '#/components/schemas/SampleLevelTwoE'
-      properties:
-        noteTest:
-          type: string
-          example: 'Level two notes Ref 1'
-          description: 'Level two description'
     SampleLevelTwoRef2:
       $ref: '#/components/schemas/SampleLevelTwoD'
+    SampleArrayString:
+      description: Sample with array properties
+      properties:
+        testList1:
+          description: Test list 1
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleLevelTwoA'
+        testList2:
+          description: Test list 3
+          type: array
+          items:
+            type: string
+            description: Array of string
+        testList3:
+          description: Test list 3
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleLevelTwoB'
